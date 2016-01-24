@@ -15,6 +15,7 @@ function getMessage(a,b){
 
     
     if(a=pngNum){
+    //значения массивов взяла из upload-stat.min.js    
     var pngNum=[23,11,75,88,14];
     var pngSum=0;    
        for (var i=0;i<pngNum.length;i++){
@@ -24,6 +25,7 @@ function getMessage(a,b){
 
      
     if(a=jpgNumA, b=jpgNumB){
+    //значения массивов взяла из upload-stat.min.js      
     var jpgNumA=[10,2,8,15];
     var jpgNumB=[4,20,5,3];
     var jpgSum=0;           
