@@ -22,8 +22,8 @@ function getMessage(a,b) {
             for(var i=0;i<a.length;i++) {
                    result+=a[i]*b[i];
                 }
-            return 'Общая площадь артефактов сжатия: ' 
-                    + result + ' пикселей' ;
+            return 'Общая площадь артефактов сжатия: '  + 
+                    result + ' пикселей' ;
         }
        var result = 0;
        for (var i=0;i<a.length;i++) {
