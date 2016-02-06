@@ -278,25 +278,12 @@ function handleInputChange() {
    * @param {Event} evt
    */
     
-var filters = filterForm['upload-filter'];    
-var filterDefault = document.getElementById('upload-filter-sepia').checked=true;  
-filters.value = docCookies.getItem('filter') ||  filterDefault;   
+ 
     
 filterForm.onsubmit = function(evt) {
     evt.preventDefault();
 
-    var filterValue;
-    for (var i = 0; i < filters.length; i++) {
-        if (filters[i].checked) {
-            filterValue = filters[i].value;
-        }
-    }    
     
-    var firstDate = new Date ('2015-12-29');
-    var dateToExpire = (Date.now()+ ((Date.now()- firstDate)));
-    var formattedDateToExpire = new Date(dateToExpire).toUTCString();
-
-    docCookies.setItem('filter', filterValue, formattedDateToExpire);
     filterForm.submit();
     
     cleanupResizer();
