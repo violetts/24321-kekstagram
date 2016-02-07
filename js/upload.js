@@ -279,9 +279,7 @@ function handleInputChange() {
    */
     
 var filters = filterForm['upload-filter'];    
-var filterDefault = document.getElementById('upload-filter-sepia').checked=true;  
- 
-filters.value = docCookies.getItem('filter') ||  filterDefault;   
+filters.value = docCookies.getItem('filter') ||  'none';   
     
     
 filterForm.onsubmit = function(evt) {
@@ -293,13 +291,10 @@ filterForm.onsubmit = function(evt) {
             filterValue = filters[i].value;
         }
     }    
-      
     
     var firstDate = new Date ('2015-12-29');
     var dateToExpire = (Date.now()+ ((Date.now()- firstDate)));
     var formattedDateToExpire = new Date(dateToExpire).toUTCString();
-
-        /*document.cookie = 'filter=' + filterValue + ';expires' + formattedDateToExpire;*/
 
     docCookies.setItem('filter', filterValue, formattedDateToExpire);
     filterForm.submit();
@@ -310,8 +305,6 @@ filterForm.onsubmit = function(evt) {
     filterForm.classList.add('invisible');
     uploadForm.classList.remove('invisible');
   };
-
-   //11*30*24*60*60*1000+29*24*60*60*1000
     
   /**
    * Обработчик изменения фильтра. Добавляет класс из filterMap соответствующий
@@ -342,10 +335,3 @@ filterForm.onsubmit = function(evt) {
   cleanupResizer();
   updateBackground();
 })();
-
-
-
-
-
-
-
