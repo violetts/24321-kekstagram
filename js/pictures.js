@@ -41,7 +41,7 @@ function getElementFromTemplate(data) {
         element.classList.add('picture-load-failure');
     }
     
-    backgroundImage.src = '/'+'24321-kekstagram'+'/' + data.url; 
+    backgroundImage.src = '/24321-kekstagram/' + data.url; 
    
 /*3 - добавить обработку вохможных ошибок (таймаут или отказ сервера)*/    
     var IMAGE_TIMEOUT = 1000;
@@ -57,10 +57,9 @@ function getElementFromTemplate(data) {
 
 /*4 - отбражение блока с фильтрами*/  
 var FiltersLoadTimeout;
-var FILTERS_TIMEOUT = 3000;
 
 FiltersLoadTimeout = setTimeout(function() {
     if(getElementFromTemplate(pictures)) {
            filters.classList.remove('hidden');
     };
-},FILTERS_TIMEOUT);
+},3000);
