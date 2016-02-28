@@ -71,21 +71,80 @@
    * Проверяет, валидны ли данные, в форме кадрирования.
    * @return {boolean}
    */
-  function resizeFormIsValid() {
-    return true;
-  }
+function resizeFormIsValid() {
+    if (sideLeft.value + sideMain.value > currentResizer._image.naturalWidth)     {
+        return false;
+    }
+    if (sideTop.value + sideMain.value > currentResizer._image.naturalHeight)     {
+        return false;
+     } 
+
+    else return true;
+}
 
   /**
    * Форма загрузки изображения.
    * @type {HTMLFormElement}
    */
-  var uploadForm = document.forms['upload-select-image'];
+var uploadForm = document.forms['upload-select-image'];
 
   /**
    * Форма кадрирования изображения.
    * @type {HTMLFormElement}
    */
-  var resizeForm = document.forms['upload-resize'];
+var resizeForm = document.forms['upload-resize'];
+
+// обращение через объект formElement
+var sideLeft = resizeForm['resize-x'];
+var sideTop = resizeForm['resize-y'];
+var sideMain = resizeForm['resize-size'];
+var submitButton = document.forms['upload-resize'].querySelector('#resize-fwd');
+
+// Поля «сверху» и «слева» не могут быть отрицательными
+sideLeft.min = 0;
+sideTop.min = 0;
+sideMain.min = 0;
+disableSubmitButton();
+
+//function
+
+sideLeft.onchange = handleInputChange
+sideTop.onchange = handleInputChange
+sideMain.onchange = handleInputChange
+
+
+
+// проверка формы validity
+function formIsValid () {
+    var fields = [sideLeft, sideTop, sideMain];
+
+    for (var i = 0; i < fields.length; i++) {
+        if (!fields[i].validity.valid || !fields[i].value) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+
+function disableSubmitButton() {
+       submitButton.disabled = true;
+ }
+
+
+function enableSubmitButton() {
+       submitButton.disabled = false;
+ }
+
+
+function handleInputChange() {
+     if (formIsValid() && resizeFormIsValid()) {
+        enableSubmitButton();
+    } else {
+        disableSubmitButton();
+    }
+}
 
   /**
    * Форма добавления фильтра.
@@ -218,9 +277,15 @@
    * записав сохраненный фильтр в cookie.
    * @param {Event} evt
    */
-  filterForm.onsubmit = function(evt) {
+    
+ 
+    
+filterForm.onsubmit = function(evt) {
     evt.preventDefault();
 
+    
+    filterForm.submit();
+    
     cleanupResizer();
     updateBackground();
 
@@ -228,6 +293,8 @@
     uploadForm.classList.remove('invisible');
   };
 
+   //11*30*24*60*60*1000+29*24*60*60*1000
+    
   /**
    * Обработчик изменения фильтра. Добавляет класс из filterMap соответствующий
    * выбранному значению в форме.
@@ -257,3 +324,14 @@
   cleanupResizer();
   updateBackground();
 })();
+
+
+
+
+
+
+
+
+
+
+
